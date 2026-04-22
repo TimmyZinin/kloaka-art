@@ -1,0 +1,188 @@
+{
+  "style_suffix": "neon synthwave, low-poly stylized, pink-magenta-cyan emissive accents, matte surfaces with glowing edges, 300-500 triangles, single centered object on transparent background, no text, no branded logos, no real-world trademarks",
+  "output_format": "glb",
+  "models": [
+    {
+      "slug": "paper_drone",
+      "category": "enemies",
+      "target_path": "Enemies/paper_drone.glb",
+      "prompt_ru": "паперный боевой дрон в форме свёрнутого бумажного свитка, полосатый тёмно-оранжевый, зазубренные края-шипы снизу, два наклейки-глазика спереди, короткие бумажные крылья по бокам",
+      "prompt_en": "aggressive orange-black striped combat drone shaped like a rolled-up paper scroll, jagged mouth on the underside, two sticker-style eyes on its front, short paper-page wings on both sides, hovering posture"
+    },
+    {
+      "slug": "poo_emoji",
+      "category": "enemies",
+      "target_path": "Assets/Resources/Enemies/poo_emoji.glb",
+      "prompt_ru": "стилизованная коричневая какашка-эмодзи с большими белыми глазами, улыбкой и закрученной верхушкой, мультяшная, блестящая, плавающая в воздухе",
+      "prompt_en": "stylised cartoon poop emoji, glossy chocolate-brown swirl with cute big white eyes and a wide smile, classic 💩 silhouette, slightly menacing version, suspended in zero gravity"
+    },
+    {
+      "slug": "mini_toilet",
+      "category": "enemies",
+      "target_path": "Assets/Resources/Enemies/mini_toilet.glb",
+      "prompt_ru": "маленький летающий белый унитаз с открытой крышкой, из чаши торчит свёрнутая бумажка-вакансия, с двумя крошечными красными кнопками-глазками",
+      "prompt_en": "tiny flying white porcelain toilet with the lid open, a rolled-up resume paper sticking out of the bowl, two tiny menacing red button eyes on the tank, cartoonish exaggerated proportions, slight angry tilt"
+    },
+    {
+      "slug": "player_ship",
+      "category": "player",
+      "target_path": "Assets/Resources/Player/player_ship.glb",
+      "prompt_ru": "уставший соискатель-стикмен летит верхом на парящей офисной тумбочке, на коленях открытый ноутбук, в руке термос с кофе, на голове мешки под глазами XX, вокруг дыма от выгорания, стикер «я ищу работу» на спине",
+      "prompt_en": "exhausted cartoon job-seeker stickman riding a floating office filing cabinet like a spaceship, open laptop in his lap, holding a coffee thermos, dark bags under XX cross-eyes, faint smoke trails of burnout swirling behind, slumped shoulders, a paper sign saying 'OPEN TO WORK' taped to his back, low-poly stylised, slightly desperate vibe"
+    },
+    {
+      "slug": "resume_ball",
+      "category": "player",
+      "target_path": "Assets/Resources/Player/resume_ball.glb",
+      "prompt_ru": "скомканный лист бумаги резюме, неровный бумажный шарик с торчащими углами, на нём видны обрывки слов Excel 10 лет Python SQL, слегка закрученный",
+      "prompt_en": "crumpled paper resume wad, rough white paper ball with jagged corners and protruding edges, visible ink fragments saying 'Excel 10yr Python SQL', slightly spinning, stylised low-poly"
+    },
+    {
+      "slug": "envelope_spammer",
+      "category": "enemies",
+      "target_path": "Enemies/envelope_spammer.glb",
+      "prompt_ru": "раздутый оранжевый бумажный конверт со злыми глазами, из которого вылетают маленькие бумажки-вакансии, мультяшный, матовые поверхности",
+      "prompt_en": "bloated orange paper envelope with angry cartoon eyes, tiny paper-vacancy slips flying out of the seam, low-poly cartoon style, matte paper surfaces"
+    },
+    {
+      "slug": "blue_guru",
+      "category": "enemies",
+      "target_path": "Enemies/blue_guru.glb",
+      "prompt_ru": "мультяшный мужчина в синем корпоративном костюме с нимбом из мотивационных хэштегов, широкая улыбка, плавает в воздухе, матовые поверхности",
+      "prompt_en": "cartoon man in a blue corporate suit with a halo of motivational hashtag bubbles around his head, exaggerated wide smile, hovering in zero gravity, low-poly matte surfaces"
+    },
+    {
+      "slug": "blue_recruiter",
+      "category": "enemies",
+      "target_path": "Enemies/blue_recruiter.glb",
+      "prompt_ru": "синий паукообразный корпоративный бот-рекрутёр с планшетом в верхней паре лап, матовый корпус, угловатый, строго геометричный",
+      "prompt_en": "blue spider-like corporate recruiter-bot with a clipboard held in its upper pair of legs, angular matte body, strict geometric shapes, menacing hover stance"
+    },
+    {
+      "slug": "hr_stealth",
+      "category": "enemies",
+      "target_path": "Assets/Resources/Enemies/hr_stealth.glb",
+      "prompt_ru": "хищник-хамелеон, мимикрирующий под дружеский чат-пузырь, зелёно-изумрудная шкура, лукавая улыбка с острыми зубами, тонкие когтистые лапки",
+      "prompt_en": "chameleon-like predator mimicking a friendly chat bubble, emerald-green scaly skin, sly toothy grin with sharp fangs, thin clawed hands, chat-bubble tail on its back"
+    },
+    {
+      "slug": "hr_blob",
+      "category": "enemies",
+      "target_path": "Assets/Resources/Enemies/hr_blob.glb",
+      "prompt_ru": "желеобразный слизень ядовито-зелёного цвета, внутри видны зачётки и тестовые задания, сверху-пляшущие глазки-буквы «Тест»",
+      "prompt_en": "slimy toxic-green jelly blob monster, translucent body with test-papers and notebooks suspended inside, two cartoonish eyes on top labeled 'TEST', oozing tendrils on its underside"
+    },
+    {
+      "slug": "boss_interviewer",
+      "category": "bosses",
+      "target_path": "Assets/Resources/Bosses/boss_interviewer.glb",
+      "prompt_ru": "гигантский костюм-пустышка тёмно-красного цвета с треснутой табличкой «CEO», вместо головы — пустота с тлеющим красным глазом, из рукавов вываливаются стопки резюме",
+      "prompt_en": "towering empty suit boss in crimson fabric, cracked broken 'CEO' badge on the chest, headless collar with a single glowing red eye floating inside, stacks of paper resumes cascading from the empty sleeves, imposing silhouette"
+    },
+    {
+      "slug": "boss_panel",
+      "category": "bosses",
+      "target_path": "Assets/Resources/Bosses/boss_panel.glb",
+      "prompt_ru": "трёхголовый босс «панель-жюри»: три корпоративные головы в галстуках на одном пьедестале, все держат блокноты и недовольно хмурятся, фиолетово-малиновая палитра",
+      "prompt_en": "three-headed interview-panel boss: three stern corporate suit-and-tie heads mounted on a shared plinth, each holding a clipboard, all frowning judgmentally, deep purple and magenta color scheme"
+    },
+    {
+      "slug": "powerup_double",
+      "category": "enemies",
+      "target_path": "Assets/Resources/Enemies/powerup_double.glb",
+      "prompt_ru": "два перекрещенных неоновых болта розового и циана цвета, сияющие, внутри прозрачного куба",
+      "prompt_en": "two crossed glowing neon bolts, one pink one cyan, suspended inside a transparent crystal cube, strong emissive glow"
+    },
+    {
+      "slug": "powerup_spread",
+      "category": "enemies",
+      "target_path": "Assets/Resources/Enemies/powerup_spread.glb",
+      "prompt_ru": "звезда-вертушка с пятью лучами неонового фиолетового цвета, в центре маленький светящийся шарик",
+      "prompt_en": "five-pointed star-shuriken in bright neon purple, small glowing sphere at its center, thin metallic outline on each blade"
+    },
+    {
+      "slug": "powerup_laser",
+      "category": "enemies",
+      "target_path": "Assets/Resources/Enemies/powerup_laser.glb",
+      "prompt_ru": "ромбовидный кристалл ярко-жёлтого цвета с внутренним свечением, тонкий ободок-золото, плавает вертикально",
+      "prompt_en": "vertical diamond-shaped crystal in vivid electric yellow with deep inner glow, thin gold trim around each edge, faceted gem cuts on all sides"
+    },
+    {
+      "slug": "office_desk",
+      "category": "office",
+      "target_path": "Assets/Resources/Office/office_desk.glb",
+      "prompt_ru": "офисный стол-уголок L-формы, серая столешница, чёрный металл-каркас, на столе монитор с чёрной рамкой, чёрная клавиатура, кружка и стопка бумаг",
+      "prompt_en": "L-shaped corporate office desk, light grey laminate surface, black metal frame, black bezel monitor with simple blue screen glow, black keyboard, coffee mug and small stack of papers on the surface"
+    },
+    {
+      "slug": "office_chair",
+      "category": "office",
+      "target_path": "Assets/Resources/Office/office_chair.glb",
+      "prompt_ru": "классическое офисное кресло на пяти колёсиках, чёрная сетчатая спинка, чёрное сиденье, хромированная стойка, газлифт",
+      "prompt_en": "classic ergonomic office chair with five-spoke wheeled base, black mesh backrest, black padded seat, chrome gas-lift pole, adjustable armrests, slight lean"
+    },
+    {
+      "slug": "cubicle_wall",
+      "category": "office",
+      "target_path": "Assets/Resources/Office/cubicle_wall.glb",
+      "prompt_ru": "офисная перегородка open-space, серая ткань, тонкая металлическая рамка, прямоугольная панель в человеческий рост",
+      "prompt_en": "standard office cubicle divider panel, grey fabric upholstery, thin silver metal frame, tall rectangular partition, slight wear at the top edge"
+    },
+    {
+      "slug": "printer_copier",
+      "category": "office",
+      "target_path": "Assets/Resources/Office/printer_copier.glb",
+      "prompt_ru": "большой офисный принтер-копир, белый пластиковый корпус, верхняя крышка стекло, лоток с бумагой снизу, синяя LED-панель управления",
+      "prompt_en": "large multi-function office printer-copier, white plastic body, glass top scanner lid, paper tray visible at the bottom, small blue LCD control panel, boxy industrial design"
+    },
+    {
+      "slug": "water_cooler",
+      "category": "office",
+      "target_path": "Assets/Resources/Office/water_cooler.glb",
+      "prompt_ru": "офисный кулер с большой синей бутылью сверху, белый корпус, два крана — синий и красный, высокий и тонкий",
+      "prompt_en": "office water cooler dispenser, large inverted blue water bottle on top, white plastic body, blue and red dispensing taps, tall thin silhouette"
+    },
+    {
+      "slug": "filing_cabinet",
+      "category": "office",
+      "target_path": "Assets/Resources/Office/filing_cabinet.glb",
+      "prompt_ru": "металлический трёхъярусный шкаф для бумаг, серо-бежевый, три выдвижных ящика с ручками-скобами и табличками для надписей",
+      "prompt_en": "standard three-drawer metal filing cabinet, beige-grey paint, three pull-out drawers with handles and small label plates, slightly battered from office use"
+    },
+    {
+      "slug": "ceiling_panel_light",
+      "category": "office",
+      "target_path": "Assets/Resources/Office/ceiling_panel_light.glb",
+      "prompt_ru": "квадратная потолочная лампа-панель, белое матовое стекло, тонкая алюминиевая рамка, изнутри светится холодным белым",
+      "prompt_en": "square suspended ceiling LED panel light, white frosted diffuser, thin aluminum frame, glowing cool-white from the inside, fluorescent-office vibe"
+    },
+    {
+      "slug": "coffee_machine",
+      "category": "office",
+      "target_path": "Assets/Resources/Office/coffee_machine.glb",
+      "prompt_ru": "чёрная офисная кофемашина, серебристая вставка, маленький экранчик, кнопки справа, подставка для чашки снизу",
+      "prompt_en": "sleek black office coffee machine, silver accent strip, small blue digital display, button row on the right, drip tray with cup rest, compact countertop size"
+    },
+    {
+      "slug": "server_rack",
+      "category": "office",
+      "target_path": "Assets/Resources/Office/server_rack.glb",
+      "prompt_ru": "серверная стойка в человеческий рост, чёрная, стеклянная дверца, внутри рядами серверы с мигающими зелёными и синими LED-индикаторами, провода сзади",
+      "prompt_en": "full-height black server rack cabinet, clear glass front door, visible rack-mounted servers inside with glowing green and blue LED status lights, cables visible at the rear, industrial look"
+    },
+    {
+      "slug": "meeting_table",
+      "category": "office",
+      "target_path": "Assets/Resources/Office/meeting_table.glb",
+      "prompt_ru": "длинный стол переговоров на восемь мест, тёмное дерево, по бокам четыре пары офисных стульев, в центре стола провод для конференцсвязи",
+      "prompt_en": "long rectangular corporate boardroom table seating eight, dark wood veneer top, eight matching office chairs arranged around it, small cable-management grommet in the centre, upscale meeting-room vibe"
+    },
+    {
+      "slug": "paper_pile",
+      "category": "office",
+      "target_path": "Assets/Resources/Office/paper_pile.glb",
+      "prompt_ru": "кривая гора офисных бумаг и резюме, слегка смятая, торчащие углы листов с видимыми обрывками слов, стопка свалена как попало",
+      "prompt_en": "messy leaning stack of office papers and resumes, slightly crumpled edges, corners poking out with visible fragments of typed text, chaotic unstable pile"
+    }
+  ]
+}

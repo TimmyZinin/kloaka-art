@@ -1,0 +1,49 @@
+name: Deploy Unity WebGL to GitHub Pages
+
+# The actual Unity WebGL build is produced out-of-tree on a long-lived
+# builder (Unity 6 LTS 6000.0.72f1 + WebGL Support) and committed into
+# build/WebGL/. This workflow only publishes those static files to GH Pages
+# on every push to main. This keeps CI fast and avoids the Unity licensing
+# pain of ephemeral CI runners.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify WebGL build is present
+        run: |
+          if [ ! -f build/WebGL/index.html ]; then
+            echo "::error::build/WebGL/index.html is missing — run the Unity build and commit build/WebGL/"
+            exit 1
+          fi
+          ls -la build/WebGL/
+          du -sh build/WebGL/
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build/WebGL
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

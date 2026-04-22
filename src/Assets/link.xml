@@ -1,0 +1,25 @@
+<!--
+Preserve types that the Unity code stripper incorrectly strips from a
+code-first project. GameBootstrap constructs GameObjects at runtime via
+[RuntimeInitializeOnLoadMethod], so static analysis of the scene cannot
+see which components we need. Force-preserve the physics and core
+modules that runtime code relies on.
+-->
+<linker>
+  <assembly fullname="Assembly-CSharp" preserve="all"/>
+  <assembly fullname="UnityEngine.PhysicsModule" preserve="all"/>
+  <assembly fullname="UnityEngine.ParticleSystemModule" preserve="all"/>
+  <assembly fullname="UnityEngine.IMGUIModule" preserve="all"/>
+  <assembly fullname="UnityEngine.CoreModule">
+    <type fullname="UnityEngine.GameObject" preserve="all"/>
+    <type fullname="UnityEngine.Transform" preserve="all"/>
+    <type fullname="UnityEngine.MeshFilter" preserve="all"/>
+    <type fullname="UnityEngine.MeshRenderer" preserve="all"/>
+    <type fullname="UnityEngine.Camera" preserve="all"/>
+    <type fullname="UnityEngine.Light" preserve="all"/>
+    <type fullname="UnityEngine.Material" preserve="all"/>
+    <type fullname="UnityEngine.Mesh" preserve="all"/>
+    <type fullname="UnityEngine.Rigidbody" preserve="all"/>
+    <type fullname="UnityEngine.RuntimeInitializeOnLoadMethodAttribute" preserve="all"/>
+  </assembly>
+</linker>
