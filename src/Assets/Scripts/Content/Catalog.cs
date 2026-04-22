@@ -50,7 +50,7 @@ namespace SpaceShooter
     {
         public EnemyFlavor flavor;
         public string displayName;
-        public string resourcePath;         // e.g. "Enemies/hh_drone" — optional
+        public string resourcePath;         // e.g. "Enemies/paper_drone" — optional
         public FallbackShape fallbackShape;
         public int hp;
         public float speedMin;

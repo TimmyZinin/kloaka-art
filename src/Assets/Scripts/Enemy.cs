@@ -32,9 +32,9 @@ namespace SpaceShooter
             fallSpeed = speed;
             radius = size;
             hp = Mathf.Max(1, definition.hp);
-            // Every enemy keeps a fixed pose facing the player so the player
-            // can read the model (hh letters, poo face, recruiter monogram).
-            // Only the abstract "asteroid" noise tumbles — it's meant to be
+            // Every enemy keeps a fixed pose facing the player so its
+            // silhouette and face read clearly at camera distance. Only the
+            // abstract "asteroid" noise tumbles — it's meant to be
             // featureless debris, not a readable character.
             spin = definition.flavor == EnemyFlavor.Asteroid
                 ? new Vector3(Random.Range(-60f, 60f),
