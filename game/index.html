@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Клоака печали — художественный проект</title>
+<meta name="description" content="Сатирическое художественное произведение о личном опыте поиска работы в России, 2020—2026. Автор: Тимофей Зинин.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://kloaka.timzinin.com/game/">
+<link rel="shortcut icon" href="TemplateData/favicon.ico">
+<link rel="stylesheet" href="TemplateData/style.css">
+<style>
+  :root{
+    --orange:#ff6f1a;
+    --ink:#111;
+    --paper:#f5efe3;
+    --muted:#6a6258;
+  }
+  html,body{margin:0;background:var(--ink);color:var(--paper);font-family:"Georgia","Iowan Old Style",serif;min-height:100vh;overflow:hidden}
+  #unity-container{display:flex;align-items:center;justify-content:center;min-height:100vh}
+  #unity-canvas{background:#000;outline:none}
+  #unity-loading-bar{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:var(--ink);z-index:5}
+  #unity-logo{display:none}
+  #unity-progress-bar-empty{width:240px;height:4px;background:#2a2a2a;border-radius:2px;overflow:hidden}
+  #unity-progress-bar-full{height:100%;width:0%;background:var(--orange);transition:width .2s}
+  #unity-warning{position:fixed;top:12px;left:12px;right:12px;z-index:6}
+
+  /* Back link */
+  .back-link{position:fixed;top:12px;left:12px;z-index:4;font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:6px 10px;border:1px solid #2a2a2a;background:rgba(17,17,17,.8)}
+  .back-link:hover{color:var(--paper);border-color:var(--muted)}
+
+  /* Disclaimer overlay — shown for 5s on load */
+  .disclaimer-overlay{position:fixed;inset:0;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:center;z-index:10;padding:24px;text-align:center;transition:opacity .5s}
+  .disclaimer-overlay.hidden{opacity:0;pointer-events:none}
+  .disclaimer-inner{max-width:560px}
+  .disclaimer-inner .eyebrow{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--orange);margin:0 0 16px}
+  .disclaimer-inner h1{font-size:28px;margin:0 0 20px;font-weight:700;letter-spacing:-.01em}
+  .disclaimer-inner p{font-size:15px;line-height:1.6;color:#bcb4a4;margin:0 0 10px}
+  .disclaimer-inner .small{font-size:12px;color:var(--muted);margin-top:24px;font-family:ui-monospace,"SF Mono",Menlo,monospace;letter-spacing:.05em}
+</style>
+</head>
+<body>
+<a href="../" class="back-link">← на главную</a>
+
+<div class="disclaimer-overlay" id="disclaimer">
+  <div class="disclaimer-inner">
+    <p class="eyebrow">Художественный проект · 2026</p>
+    <h1>Клоака печали</h1>
+    <p>
+      Все образы, персонажи и ситуации — собирательные и являются
+      художественным вымыслом. Любые совпадения с реальными компаниями
+      и сервисами отражают авторскую критику индустрии найма в России
+      как культурного феномена, а не конкретных юридических лиц.
+    </p>
+    <p>
+      Произведение распространяется на условиях <a href="../LICENSE" style="color:#bcb4a4">CC BY-NC-SA 4.0</a>
+      и не является рекламой.
+    </p>
+    <p class="small">© 2026 Тимофей Зинин · @timzinin</p>
+  </div>
+</div>
+
+<div id="unity-container" class="unity-desktop">
+  <canvas id="unity-canvas" width="960" height="600" tabindex="-1"></canvas>
+  <div id="unity-loading-bar">
+    <div id="unity-logo"></div>
+    <div id="unity-progress-bar-empty">
+      <div id="unity-progress-bar-full"></div>
+    </div>
+  </div>
+  <div id="unity-warning"></div>
+</div>
+
+<script>
+  // Hide disclaimer after 5 seconds
+  setTimeout(function(){
+    var el = document.getElementById('disclaimer');
+    if(el) el.classList.add('hidden');
+    setTimeout(function(){ if(el) el.style.display='none'; }, 600);
+  }, 5000);
+
+  var canvas = document.querySelector("#unity-canvas");
+
+  function unityShowBanner(msg, type) {
+    var warningBanner = document.querySelector("#unity-warning");
+    function updateBannerVisibility() {
+      warningBanner.style.display = warningBanner.children.length ? 'block' : 'none';
+    }
+    var div = document.createElement('div');
+    div.innerHTML = msg;
+    warningBanner.appendChild(div);
+    if (type == 'error') div.style = 'background: red; padding: 10px;';
+    else {
+      if (type == 'warning') div.style = 'background: yellow; padding: 10px;';
+      setTimeout(function() {
+        warningBanner.removeChild(div);
+        updateBannerVisibility();
+      }, 5000);
+    }
+    updateBannerVisibility();
+  }
+
+  var buildUrl = "Build";
+  var loaderUrl = buildUrl + "/game.loader.js";
+  var config = {
+    arguments: [],
+    dataUrl: buildUrl + "/game.data.unityweb",
+    frameworkUrl: buildUrl + "/game.framework.js.unityweb",
+    codeUrl: buildUrl + "/game.wasm.unityweb",
+    streamingAssetsUrl: "StreamingAssets",
+    companyName: "Zinin Corp",
+    productName: "Kloaka Pechali",
+    productVersion: "1.0",
+    showBanner: unityShowBanner,
+  };
+
+  if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+    var meta = document.createElement('meta');
+    meta.name = 'viewport';
+    meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+    document.getElementsByTagName('head')[0].appendChild(meta);
+    document.querySelector("#unity-container").className = "unity-mobile";
+    canvas.className = "unity-mobile";
+  } else {
+    canvas.style.width = "960px";
+    canvas.style.height = "600px";
+  }
+
+  document.querySelector("#unity-loading-bar").style.display = "flex";
+
+  var script = document.createElement("script");
+  script.src = loaderUrl;
+  script.onload = function(){
+    createUnityInstance(canvas, config, function(progress){
+      document.querySelector("#unity-progress-bar-full").style.width = (100 * progress) + "%";
+    }).then(function(unityInstance){
+      document.querySelector("#unity-loading-bar").style.display = "none";
+    }).catch(function(message){
+      alert(message);
+    });
+  };
+  document.body.appendChild(script);
+</script>
+</body>
+</html>
