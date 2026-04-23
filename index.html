@@ -3,11 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Клоака печали — художественный проект</title>
-<meta name="description" content="Сатирическое художественное произведение о личном опыте поиска работы в России, 2020—2026. Автор: Тимофей Зинин.">
+<title>Клоака печали — художественный проект, эпизод 01</title>
+<meta name="description" content="Интерактивное художественное произведение о ритуалах поиска работы в России, 2020—2026. Автор: Тимофей Зинин. Эпизод 01 — в браузере, ~10 минут, без регистрации.">
 <meta name="robots" content="index,follow">
-<meta property="og:title" content="Клоака печали">
-<meta property="og:description" content="Художественный проект о ритуалах российского рынка труда. CC BY-NC-SA 4.0.">
+
+<meta property="og:title" content="Клоака печали — эпизод 01">
+<meta property="og:description" content="Интерактивное художественное произведение о ритуалах российского рынка труда. В браузере, ~10 минут.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://kloaka.timzinin.com/">
 <meta property="og:image" content="https://kloaka.timzinin.com/assets/og.jpg">
@@ -16,86 +17,508 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://kloaka.timzinin.com/assets/og.jpg">
 <link rel="canonical" href="https://kloaka.timzinin.com/">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..900,0..100,0..1&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
 <style>
   :root{
     --orange:#ff6f1a;
+    --orange-dim:#c9561f;
     --ink:#111;
+    --ink-soft:#1a1a1a;
     --paper:#f5efe3;
+    --paper-dim:#eae3d3;
     --muted:#6a6258;
+    --rule:#d8d0bf;
+
+    --f-display: "Fraunces","Instrument Serif","Georgia",serif;
+    --f-body:    "Instrument Serif","Georgia",serif;
+    --f-read:    "Georgia","Iowan Old Style","Times New Roman",serif;
+    --f-mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+    --col: minmax(0,1fr);
+    --gutter: clamp(16px, 2vw, 32px);
+    --max: 1440px;
   }
   *{box-sizing:border-box}
-  html,body{margin:0;background:var(--paper);color:var(--ink);font-family:"Georgia","Iowan Old Style",serif;line-height:1.55;-webkit-font-smoothing:antialiased}
-  a{color:var(--ink);text-underline-offset:3px}
-  a:hover{color:var(--orange)}
-  .hero{background:var(--ink);width:100%}
-  .hero-inner{max-width:960px;margin:0 auto;padding:0}
-  .hero img{display:block;width:100%;height:auto;max-height:min(88vh,820px);object-fit:cover;object-position:center}
-  .wrap{max-width:680px;padding:48px 24px 96px;margin:0 auto}
-  .eyebrow{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
-  .lede{font-size:22px;margin:.4em 0 2em;color:#2a2420;line-height:1.45}
-  .cta{display:inline-block;padding:14px 22px;border:2px solid var(--ink);background:var(--ink);color:var(--paper);text-decoration:none;font-weight:700;letter-spacing:.02em}
-  .cta:hover{background:var(--orange);border-color:var(--orange);color:var(--ink)}
-  .cta.secondary{background:transparent;color:var(--ink);margin-left:12px}
-  .cta.secondary:hover{background:var(--ink);color:var(--paper)}
-  .meta{margin-top:4em;padding-top:2em;border-top:1px solid #d8d0bf;font-size:14px;color:var(--muted)}
-  .meta p{margin:.5em 0}
-  .meta a{color:var(--muted)}
-  .disclaimer{margin-top:3em;padding:20px 22px;background:#eae3d3;font-size:14px;color:#4a4238}
-  .disclaimer strong{color:var(--ink)}
-  section.about{margin-top:3em}
-  section.about h2{font-size:14px;font-family:ui-monospace,"SF Mono",Menlo,monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:600}
-  section.about p{font-size:17px}
+  html{scroll-behavior:auto}
+  html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-read);line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  body{overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--orange);color:var(--ink)}
+
+  /* ─── WALL LABEL TOP ──────────────────────────────────── */
+  .wall{
+    position:fixed;inset:0 0 auto 0;z-index:50;
+    display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+    padding:14px clamp(16px,3vw,40px);
+    font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--paper);mix-blend-mode:difference;
+    pointer-events:none;
+  }
+  .wall .l, .wall .r{display:flex;gap:18px}
+  .wall .r{justify-content:flex-end}
+  .wall .c{text-align:center;opacity:.8}
+  .wall a{pointer-events:auto}
+  .wall .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--orange);margin-right:8px;transform:translateY(-1px)}
+
+  /* ─── SCROLL PROGRESS ─────────────────────────────────── */
+  .progress{
+    position:fixed;top:50%;right:clamp(16px,2vw,28px);transform:translateY(-50%);
+    width:1px;height:42vh;background:color-mix(in oklab, var(--ink) 25%, transparent);
+    z-index:49;pointer-events:none;
+  }
+  .progress::after{
+    content:"";position:absolute;left:-2px;top:0;width:5px;height:22px;background:var(--orange);
+    transform:translateY(var(--p, 0%));transition:transform .1s linear;
+    box-shadow: 0 0 14px rgba(255,111,26,.5);
+  }
+
+  /* ─── HERO ─────────────────────────────────────────────── */
+  .hero{position:relative;height:100svh;min-height:640px;background:var(--ink);overflow:hidden;isolation:isolate}
+  .hero__bg{position:absolute;inset:-6% -2% -12% -2%;will-change:transform}
+  .hero__bg img{width:100%;height:100%;object-fit:cover;object-position:center 40%;display:block}
+  .hero__bg::after{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(ellipse at 50% 85%, rgba(255,111,26,.18), transparent 60%),
+      linear-gradient(180deg, rgba(17,17,17,0) 55%, rgba(17,17,17,.7) 100%);
+    pointer-events:none;
+  }
+  .hero__overlay{position:relative;z-index:2;height:100%;display:grid;grid-template-rows:1fr auto;padding:72px clamp(16px,3vw,40px) clamp(20px,4vh,40px)}
+  .hero__kicker{
+    align-self:end;justify-self:start;
+    font-family:var(--f-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--paper);opacity:.78;max-width:38ch;line-height:1.7;
+  }
+  .hero__kicker strong{color:var(--orange);font-weight:500}
+  .hero__foot{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;color:var(--paper);opacity:.85}
+  .hero__scroll{
+    font-family:var(--f-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+    display:flex;align-items:center;gap:12px;color:var(--paper);
+  }
+  .hero__scroll .line{display:inline-block;width:40px;height:1px;background:var(--paper);position:relative;overflow:hidden}
+  .hero__scroll .line::before{content:"";position:absolute;inset:0;background:var(--orange);transform:translateX(-100%);animation:slide 2.2s ease-in-out infinite}
+  @keyframes slide{
+    0%{transform:translateX(-100%)}
+    50%{transform:translateX(0)}
+    100%{transform:translateX(100%)}
+  }
+  .hero__spec{font-family:var(--f-mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;text-align:right;line-height:1.9;opacity:.7}
+
+  /* ─── SECTIONS SHARED ──────────────────────────────────── */
+  section{position:relative}
+  .container{max-width:var(--max);margin:0 auto;padding:0 clamp(16px,3vw,40px)}
+  .num{font-family:var(--f-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+  .hr{height:1px;background:var(--rule);border:0;margin:0}
+
+  /* reveal animation (pure CSS fallback, enhanced via GSAP) */
+  [data-reveal]{opacity:0;transform:translateY(24px);transition:opacity 1s ease, transform 1s cubic-bezier(.22,1,.36,1)}
+  [data-reveal].is-in{opacity:1;transform:none}
+  @media (prefers-reduced-motion: reduce){
+    [data-reveal]{opacity:1;transform:none;transition:none}
+  }
+
+  /* ─── QUOTE (artist statement teaser) ─────────────────── */
+  .quote{padding:clamp(80px,12vh,160px) 0 clamp(60px,10vh,120px);background:var(--paper)}
+  .quote__inner{max-width:1000px;margin:0 auto;padding:0 clamp(16px,3vw,40px)}
+  .quote__label{display:flex;align-items:center;gap:14px;margin-bottom:28px}
+  .quote__label::before{content:"";width:36px;height:1px;background:var(--ink)}
+  .quote__label span{font-family:var(--f-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase}
+  .quote__text{
+    font-family:var(--f-display);font-weight:300;font-style:italic;
+    font-size:clamp(32px,5.5vw,72px);line-height:1.08;letter-spacing:-.01em;
+    color:var(--ink);margin:0;
+    font-variation-settings:"opsz" 144, "SOFT" 30, "WONK" 0;
+  }
+  .quote__text em{font-style:italic;color:var(--orange-dim)}
+  .quote__sig{margin-top:36px;font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:flex;gap:14px;align-items:center}
+  .quote__sig a{border-bottom:1px solid var(--muted);padding-bottom:2px}
+  .quote__sig a:hover{color:var(--orange);border-color:var(--orange)}
+
+  /* ─── CHAPTERS ────────────────────────────────────────── */
+  .chapters{background:var(--ink);color:var(--paper);padding:clamp(80px,14vh,180px) 0}
+  .chapters .container{max-width:var(--max)}
+  .chapters__head{display:grid;grid-template-columns:1fr auto;align-items:end;gap:40px;margin-bottom:clamp(40px,6vw,80px);padding-bottom:28px;border-bottom:1px solid rgba(245,239,227,.2)}
+  .chapters__head h2{
+    font-family:var(--f-display);font-weight:400;font-style:italic;
+    font-size:clamp(40px,7vw,96px);line-height:.95;letter-spacing:-.02em;margin:0;
+    font-variation-settings:"opsz" 144, "SOFT" 50, "WONK" 1;
+  }
+  .chapters__head .num{color:rgba(245,239,227,.5)}
+  .chapter{
+    display:grid;grid-template-columns:minmax(120px,0.9fr) minmax(0,4fr);gap:clamp(24px,4vw,80px);
+    padding:clamp(32px,5vh,56px) 0;border-bottom:1px solid rgba(245,239,227,.12);
+    align-items:start;position:relative;
+  }
+  .chapter:last-child{border-bottom:0}
+  .chapter__no{
+    font-family:var(--f-display);font-weight:300;
+    font-size:clamp(80px,14vw,180px);line-height:.82;letter-spacing:-.04em;
+    color:var(--orange);opacity:.92;
+    font-variation-settings:"opsz" 144, "SOFT" 0, "WONK" 1;
+  }
+  .chapter__body h3{
+    font-family:var(--f-display);font-weight:500;
+    font-size:clamp(28px,3.8vw,56px);line-height:1.02;letter-spacing:-.01em;
+    margin:0 0 14px;color:var(--paper);
+    font-variation-settings:"opsz" 144, "SOFT" 30, "WONK" 0;
+  }
+  .chapter__mood{
+    font-family:var(--f-body);font-style:italic;font-size:clamp(18px,2vw,26px);line-height:1.4;
+    color:rgba(245,239,227,.75);margin:0 0 16px;max-width:42ch;
+  }
+  .chapter__tag{font-family:var(--f-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--orange);opacity:.8}
+
+  /* ─── SPECIFICATIONS ──────────────────────────────────── */
+  .specs{padding:clamp(80px,14vh,160px) 0;background:var(--paper)}
+  .specs__inner{max-width:960px;margin:0 auto;padding:0 clamp(16px,3vw,40px)}
+  .specs__head{font-family:var(--f-mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:40px;display:flex;align-items:center;gap:14px}
+  .specs__head::before{content:"";width:36px;height:1px;background:var(--ink)}
+  .specs table{width:100%;border-collapse:collapse;font-family:var(--f-mono);font-size:13px}
+  .specs tr{border-top:1px solid var(--rule)}
+  .specs tr:last-child{border-bottom:1px solid var(--rule)}
+  .specs td{padding:18px 0;vertical-align:top}
+  .specs td:first-child{width:32%;color:var(--muted);text-transform:uppercase;letter-spacing:.14em;font-size:11px}
+  .specs td:last-child{color:var(--ink);letter-spacing:.02em}
+
+  /* ─── PRIMARY CTA ─────────────────────────────────────── */
+  .enter{
+    background:var(--paper);
+    padding:clamp(80px,16vh,200px) 0 clamp(60px,12vh,140px);
+    text-align:center;position:relative;
+  }
+  .enter__word{
+    display:inline-block;
+    font-family:var(--f-display);font-weight:400;font-style:italic;
+    font-size:clamp(90px,20vw,280px);line-height:.88;letter-spacing:-.04em;
+    color:var(--ink);
+    font-variation-settings:"opsz" 144, "SOFT" 30, "WONK" 1;
+    position:relative;text-decoration:none;
+    transition:color .3s ease;
+  }
+  .enter__word:hover{color:var(--orange)}
+  .enter__word .arrow{display:inline-block;transition:transform .35s cubic-bezier(.22,1,.36,1)}
+  .enter__word:hover .arrow{transform:translateX(.2em)}
+  .enter__sub{
+    margin-top:28px;font-family:var(--f-mono);font-size:12px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--muted);
+    display:flex;gap:24px;justify-content:center;flex-wrap:wrap;
+  }
+  .enter__sub span{display:inline-flex;gap:10px;align-items:center}
+  .enter__sub span::before{content:"·";color:var(--orange);font-weight:700}
+  .enter__sub span:first-child::before{display:none}
+
+  /* ─── TRANSMISSION (share) ────────────────────────────── */
+  .transmit{padding:clamp(60px,10vh,100px) 0;background:var(--paper);border-top:1px solid var(--rule)}
+  .transmit__inner{max-width:960px;margin:0 auto;padding:0 clamp(16px,3vw,40px);display:grid;grid-template-columns:auto 1fr;align-items:center;gap:40px}
+  .transmit__label{font-family:var(--f-mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:14px}
+  .transmit__label::before{content:"";width:28px;height:1px;background:var(--muted)}
+  .transmit__links{display:flex;gap:clamp(24px,4vw,56px);flex-wrap:wrap;font-family:var(--f-body);font-style:italic;font-size:clamp(20px,2.4vw,32px)}
+  .transmit__links a{border-bottom:1px solid var(--ink);padding-bottom:3px;transition:color .2s, border-color .2s}
+  .transmit__links a:hover{color:var(--orange);border-color:var(--orange)}
+
+  /* ─── FOOTER ───────────────────────────────────────────── */
+  footer.foot{padding:clamp(40px,6vh,64px) 0 60px;background:var(--ink);color:var(--paper)}
+  .foot__inner{max-width:var(--max);margin:0 auto;padding:0 clamp(16px,3vw,40px);display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(16px,2vw,32px)}
+  .foot__inner > *{grid-column:span 12}
+  .foot__small{font-family:var(--f-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(245,239,227,.55);line-height:1.8;max-width:64ch}
+  .foot__small a{border-bottom:1px solid rgba(245,239,227,.4);padding-bottom:1px}
+  .foot__small a:hover{color:var(--orange);border-color:var(--orange)}
+  .foot__mark{font-family:var(--f-display);font-style:italic;font-weight:300;font-size:clamp(48px,8vw,120px);line-height:.9;letter-spacing:-.02em;color:rgba(245,239,227,.14);margin:0 0 28px}
+  @media (min-width:900px){
+    .foot__mark{grid-column:span 6}
+    .foot__right{grid-column:span 6}
+  }
+
+  /* ─── LAYOUT RESPONSIVE ───────────────────────────────── */
+  @media (max-width:720px){
+    .wall .c{display:none}
+    .progress{display:none}
+    .chapter{grid-template-columns:1fr;gap:12px;padding:40px 0}
+    .chapter__no{font-size:72px}
+    .transmit__inner{grid-template-columns:1fr;gap:18px}
+    .hero__foot{flex-direction:column;align-items:flex-start;gap:16px}
+    .hero__spec{text-align:left}
+  }
+
+  /* ─── CUSTOM CURSOR (desktop only) ────────────────────── */
+  @media (hover:hover) and (pointer:fine){
+    body.has-cursor *, body.has-cursor{cursor:none!important}
+    .cursor{
+      position:fixed;top:0;left:0;width:12px;height:12px;border-radius:50%;
+      background:var(--orange);pointer-events:none;z-index:100;mix-blend-mode:difference;
+      transform:translate(-50%,-50%);transition:width .2s, height .2s, background .2s;
+      will-change:transform;
+    }
+    .cursor.is-hover{width:44px;height:44px;background:var(--paper)}
+  }
+  @media (hover:none){ .cursor{display:none} }
+
+  /* ─── DETAILS (no-js fallbacks etc) ───────────────────── */
+  .nojs-cta{display:none}
+  html.no-js .nojs-cta{display:block}
 </style>
 </head>
 <body>
 
-<section class="hero">
-  <div class="hero-inner">
-    <img src="./assets/hero.jpg" alt="Клоака печали — художественный проект: человек на краю бездны, куда падает бесконечный поток резюме и оранжевых конвертов" width="1024" height="1024">
+<!-- WALL LABEL — fixed top bar -->
+<div class="wall" aria-hidden="false">
+  <div class="l"><span><span class="dot"></span>ТИМОФЕЙ ЗИНИН</span></div>
+  <div class="c">КЛОАКА ПЕЧАЛИ · 2026 · ЭПИЗОД 01</div>
+  <div class="r"><a href="./manifesto.html">МАНИФЕСТ</a></div>
+</div>
+
+<!-- SCROLL PROGRESS -->
+<div class="progress" aria-hidden="true"></div>
+
+<!-- CUSTOM CURSOR -->
+<div class="cursor" aria-hidden="true"></div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero__bg">
+    <img src="./assets/hero.jpg" alt="Клоака печали — бесконечный поток резюме и оранжевых конвертов падает в светящуюся бездну, силуэт человека на краю" width="1024" height="1024" fetchpriority="high">
+  </div>
+  <div class="hero__overlay">
+    <div class="hero__kicker" data-reveal>
+      ИНТЕРАКТИВНОЕ ПРОИЗВЕДЕНИЕ · <strong>2026</strong><br>
+      О РИТУАЛАХ ПОИСКА РАБОТЫ В РОССИИ
+    </div>
+    <div class="hero__foot">
+      <div class="hero__scroll">
+        СКРОЛЛИТЬ&nbsp;<span class="line"></span>
+      </div>
+      <div class="hero__spec">
+        HTML · WebGL · ~10 MIN<br>
+        SINGLE-PLAYER · В БРАУЗЕРЕ
+      </div>
+    </div>
   </div>
 </section>
 
-<div class="wrap">
-
-  <p class="eyebrow">Художественный проект · 2026</p>
-
-  <p class="lede">
-    Сатира о личном опыте поиска работы в России, 2020—2026.
-    Интерактивное произведение в форме игры.
-  </p>
-
-  <p>
-    <a class="cta" href="./game/">Играть</a>
-    <a class="cta secondary" href="./manifesto.html">Читать манифест</a>
-  </p>
-
-  <section class="about">
-    <h2>О проекте</h2>
-    <p>
-      «Клоака печали» исследует ритуалы современного российского рынка труда:
-      инфляцию языка найма, эстетику цифровой бесконечности и выгорание
-      как коллективное переживание. Это не публицистика и не руководство —
-      это художественное высказывание автора, прошедшего через описываемый опыт.
+<!-- ARTIST STATEMENT TEASER -->
+<section class="quote">
+  <div class="quote__inner">
+    <div class="quote__label" data-reveal><span>ИЗ МАНИФЕСТА АВТОРА · 22 АПРЕЛЯ 2026</span></div>
+    <p class="quote__text" data-reveal>
+      Это не про компании. Это про <em>ощущение</em> того, как тебя перемалывает
+      машина, которая якобы существует ради тебя.
     </p>
-    <p>
-      Все персонажи, противники и ситуации — собирательные образы.
-      Полное заявление автора о художественном замысле — в <a href="./manifesto.html">манифесте</a>.
-    </p>
-  </section>
-
-  <div class="disclaimer">
-    <strong>Дисклеймер.</strong> Все образы и ситуации — собирательные
-    и художественный вымысел. Любые совпадения с реальными компаниями
-    и сервисами отражают авторскую критику культурного феномена,
-    а не конкретных юридических лиц. Произведение не является рекламой.
+    <div class="quote__sig" data-reveal>
+      <span>— ТИМОФЕЙ ЗИНИН</span>
+      <a href="./manifesto.html">ЧИТАТЬ ПОЛНОСТЬЮ →</a>
+    </div>
   </div>
+</section>
 
-  <footer class="meta">
-    <p>© 2026 Тимофей Зинин · <a href="https://t.me/timzinin">@timzinin</a></p>
-    <p>Лицензия: <a href="./LICENSE">CC BY-NC-SA 4.0</a> · <a href="https://github.com/TimmyZinin/kloaka-art">Исходники</a></p>
-    <p>Постоянный адрес: <code>kloaka.timzinin.com</code></p>
-  </footer>
+<!-- CHAPTERS -->
+<section class="chapters">
+  <div class="container">
+    <div class="chapters__head">
+      <h2 data-reveal>Четыре главы,<br>один выход.</h2>
+      <div class="num" data-reveal>I / IV · АКТЫ ПРОИЗВЕДЕНИЯ</div>
+    </div>
 
-</div>
+    <article class="chapter" data-reveal>
+      <div class="chapter__no">01</div>
+      <div class="chapter__body">
+        <h3>Оранжевая барахолка</h3>
+        <p class="chapter__mood">Лента, которая никогда не заканчивается. Всё горит оранжевым. Внизу — дно, которого нет.</p>
+        <div class="chapter__tag">СПАМ-ДРОНЫ · ВАКАНСИИ-КОНВЕРТЫ · БОСС: ИНТЕРВЬЮЕР</div>
+      </div>
+    </article>
+
+    <article class="chapter" data-reveal>
+      <div class="chapter__no">02</div>
+      <div class="chapter__body">
+        <h3>Галактика гуру</h3>
+        <p class="chapter__mood">Синие костюмы. Хэштеги вместо лиц. «Booking a call is the new handshake».</p>
+        <div class="chapter__tag">#OPENTOWORK · #GRINDSET · БОСС: ПАНЕЛЬ ИНТЕРВЬЮЕРОВ</div>
+      </div>
+    </article>
+
+    <article class="chapter" data-reveal>
+      <div class="chapter__no">03</div>
+      <div class="chapter__body">
+        <h3>HR-болото</h3>
+        <p class="chapter__mood">«Мы изучим ваше резюме и вернёмся к вам.» Никто никогда не возвращается.</p>
+        <div class="chapter__tag">ТЕСТОВЫЕ ЗАДАНИЯ · ПЯТЬ ЭТАПОВ · ХАМЕЛЕОНЫ</div>
+      </div>
+    </article>
+
+    <article class="chapter" data-reveal>
+      <div class="chapter__no">04</div>
+      <div class="chapter__body">
+        <h3>Финальное собеседование</h3>
+        <p class="chapter__mood">«А где вы видите себя через пять лет?» Последний рывок сквозь пустой костюм.</p>
+        <div class="chapter__tag">ФИНАЛ · БОСС: ПОЛЫЙ CEO · РАЗВЯЗКА</div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- SPECIFICATIONS — exhibition label -->
+<section class="specs">
+  <div class="specs__inner">
+    <div class="specs__head" data-reveal><span>СПЕЦИФИКАЦИЯ РАБОТЫ</span></div>
+    <table>
+      <tr><td>Автор</td><td>Тимофей Зинин</td></tr>
+      <tr><td>Название</td><td>Клоака печали · Эпизод 01</td></tr>
+      <tr><td>Год</td><td>2026</td></tr>
+      <tr><td>Медиум</td><td>Интерактивное веб-произведение (WebGL / Unity 6 / IL2CPP / Brotli)</td></tr>
+      <tr><td>Длительность</td><td>~10 минут · один игрок · без сохранения</td></tr>
+      <tr><td>Язык</td><td>Русский</td></tr>
+      <tr><td>Лицензия</td><td>Creative Commons BY-NC-SA 4.0</td></tr>
+      <tr><td>Платформа</td><td>Настольный браузер (Chrome / Safari / Firefox). Мобильный — ограниченно.</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- PRIMARY CTA — ВОЙТИ -->
+<section class="enter">
+  <a class="enter__word" href="./game/" aria-label="Войти в произведение">
+    Войти<span class="arrow"> →</span>
+  </a>
+  <div class="enter__sub">
+    <span>~10 МИНУТ</span>
+    <span>В БРАУЗЕРЕ</span>
+    <span>БЕЗ РЕГИСТРАЦИИ</span>
+  </div>
+</section>
+
+<!-- TRANSMISSION -->
+<section class="transmit">
+  <div class="transmit__inner">
+    <div class="transmit__label"><span>ПЕРЕДАТЬ</span></div>
+    <div class="transmit__links">
+      <a href="https://t.me/share/url?url=https%3A%2F%2Fkloaka.timzinin.com%2F&text=%D0%9A%D0%BB%D0%BE%D0%B0%D0%BA%D0%B0%20%D0%BF%D0%B5%D1%87%D0%B0%D0%BB%D0%B8%20%E2%80%94%20%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%B2%D0%BD%D0%BE%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B8%D0%B7%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5" target="_blank" rel="noopener">Telegram</a>
+      <a href="https://twitter.com/intent/tweet?text=%D0%9A%D0%BB%D0%BE%D0%B0%D0%BA%D0%B0%20%D0%BF%D0%B5%D1%87%D0%B0%D0%BB%D0%B8%20%E2%80%94%20%D1%85%D1%83%D0%B4%D0%BE%D0%B6%D0%B5%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D1%8B%D0%B9%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%20%D0%B2%20%D1%84%D0%BE%D1%80%D0%BC%D0%B5%20%D0%B8%D0%B3%D1%80%D1%8B%20https%3A%2F%2Fkloaka.timzinin.com%2F" target="_blank" rel="noopener">X / Twitter</a>
+      <a href="#" data-copy="https://kloaka.timzinin.com/">Скопировать ссылку</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="foot__inner">
+    <div class="foot__mark">kloaka.timzinin.com</div>
+    <div class="foot__right">
+      <p class="foot__small">
+        © 2026 Тимофей Зинин · <a href="https://t.me/timzinin">@timzinin</a><br>
+        Лицензия: <a href="./LICENSE">CC BY-NC-SA 4.0</a> · <a href="https://github.com/TimmyZinin/kloaka-art">Исходники</a><br>
+        Художественное произведение. Все образы, персонажи и ситуации — собирательные.
+        Любые совпадения с реальными компаниями и сервисами отражают авторскую критику
+        культурного феномена, а не конкретных юридических лиц.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<!-- SCRIPTS — CDN, async -->
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script defer>
+window.addEventListener('load', function(){
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Custom cursor (desktop only)
+  var hasFine = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+  if (hasFine) {
+    var cursor = document.querySelector('.cursor');
+    document.body.classList.add('has-cursor');
+    var cx=0, cy=0, tx=0, ty=0;
+    window.addEventListener('mousemove', function(e){ tx = e.clientX; ty = e.clientY; });
+    function loop(){
+      cx += (tx - cx) * 0.22;
+      cy += (ty - cy) * 0.22;
+      cursor.style.transform = 'translate(' + cx + 'px,' + cy + 'px) translate(-50%,-50%)';
+      requestAnimationFrame(loop);
+    }
+    loop();
+    document.querySelectorAll('a, button, [data-copy]').forEach(function(el){
+      el.addEventListener('mouseenter', function(){ cursor.classList.add('is-hover'); });
+      el.addEventListener('mouseleave', function(){ cursor.classList.remove('is-hover'); });
+    });
+  }
+
+  // Copy link
+  document.querySelectorAll('[data-copy]').forEach(function(el){
+    el.addEventListener('click', function(e){
+      e.preventDefault();
+      var url = el.getAttribute('data-copy');
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(url);
+        var prev = el.textContent;
+        el.textContent = 'Скопировано';
+        setTimeout(function(){ el.textContent = prev; }, 1600);
+      }
+    });
+  });
+
+  // Scroll progress bar
+  var progress = document.querySelector('.progress');
+  function updateProgress(){
+    var h = document.documentElement;
+    var ratio = h.scrollTop / (h.scrollHeight - h.clientHeight);
+    progress.style.setProperty('--p', (ratio * (42*window.innerHeight/100 - 22)) + 'px');
+  }
+
+  // Lenis smooth scroll
+  var lenis = null;
+  if (typeof Lenis !== 'undefined' && !reduced) {
+    lenis = new Lenis({ duration: 1.1, smoothWheel: true, smoothTouch: false });
+    function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+    lenis.on('scroll', updateProgress);
+  } else {
+    window.addEventListener('scroll', updateProgress, { passive:true });
+  }
+  updateProgress();
+
+  // GSAP parallax + reveals
+  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+
+    if (!reduced) {
+      // Hero parallax
+      gsap.to('.hero__bg', {
+        yPercent: 18,
+        ease: 'none',
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
+      });
+      // Chapter numbers subtle parallax
+      gsap.utils.toArray('.chapter').forEach(function(ch){
+        var no = ch.querySelector('.chapter__no');
+        gsap.to(no, {
+          yPercent: -14,
+          ease: 'none',
+          scrollTrigger: { trigger: ch, start: 'top bottom', end: 'bottom top', scrub: true }
+        });
+      });
+    }
+
+  }
+
+  // Reveals via IntersectionObserver (more reliable than ScrollTrigger for reveals)
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.01 });
+    document.querySelectorAll('[data-reveal]').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('[data-reveal]').forEach(function(el){ el.classList.add('is-in'); });
+  }
+  // Safety fallback — force reveal after 2.5s regardless
+  setTimeout(function(){
+    document.querySelectorAll('[data-reveal]:not(.is-in)').forEach(function(el){ el.classList.add('is-in'); });
+  }, 2500);
+});
+</script>
 </body>
 </html>
