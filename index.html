@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Клоака печали — эпизод 01 — играть в браузере</title>
-<meta name="description" content="Клоака печали — десять минут через ритуалы поиска работы в России. Четыре уровня, один выход. В браузере, бесплатно.">
-<meta name="theme-color" content="#111111">
+<title>Клоака печали — шутер про поиск работы в России</title>
+<meta name="description" content="Пять лет HH, LinkedIn и гуру-коучей — за десять минут. Шутер про то, как в России ищут работу. В браузере, бесплатно.">
+<meta name="theme-color" content="#0d0d0d">
 <meta name="robots" content="index,follow">
 
-<meta property="og:title" content="Клоака печали — играть в браузере">
-<meta property="og:description" content="Десять минут через всё, что достало тебя за пять лет поисков работы. Игра.">
+<meta property="og:title" content="Клоака печали — шутер про поиск работы">
+<meta property="og:description" content="Пять лет HH, LinkedIn и собеседований — за десять минут. В браузере.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kloaka.timzinin.com/">
 <meta property="og:image" content="https://kloaka.timzinin.com/assets/characters/og-banner.jpg">
@@ -18,11 +18,11 @@
 <meta property="og:image:alt" content="Клоака печали — поток резюме и оранжевых конвертов падает в оранжевую бездну">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://kloaka.timzinin.com/assets/characters/og-banner.jpg">
-<meta name="twitter:title" content="Клоака печали — играть в браузере">
-<meta name="twitter:description" content="Десять минут, четыре уровня, один выход. Игра.">
+<meta name="twitter:title" content="Клоака печали — шутер про поиск работы">
+<meta name="twitter:description" content="Пять лет поисков работы — за десять минут. В браузере.">
 <link rel="canonical" href="https://kloaka.timzinin.com/">
 
-<link rel="preload" as="image" href="./assets/hero.jpg">
+<link rel="preload" as="image" href="./assets/hero-wide.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..900,0..100,0..1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -70,17 +70,19 @@
 
   /* ─── HERO ─────────────────────────────────────────────── */
   .hero{position:relative;min-height:100svh;background:var(--ink);overflow:hidden;isolation:isolate;display:grid;grid-template-rows:1fr auto}
-  .hero__bg{position:absolute;inset:0;will-change:transform;z-index:0}
-  .hero__bg img{width:100%;height:100%;object-fit:contain;object-position:center bottom}
-  @media (min-aspect-ratio: 4/3){
-    .hero__bg{background:
-      radial-gradient(ellipse at 50% 78%, #1e1a14 0%, var(--ink) 55%);}
+  .hero__bg{position:absolute;inset:0;will-change:transform;z-index:0;background:var(--ink)}
+  /* New wide hero art: края уже растворены в чёрное, никаких letterbox-швов.
+     Картинка — poster-composition, диагональный поток конвертов, силуэт справа. */
+  .hero__bg img{
+    width:100%;height:100%;
+    object-fit:cover;
+    object-position:center 55%;
+    display:block;
   }
   .hero__bg::after{
     content:"";position:absolute;inset:0;
     background:
-      radial-gradient(ellipse at 50% 95%, rgba(255,111,26,.15), transparent 60%),
-      linear-gradient(180deg, rgba(13,13,13,.45) 0%, rgba(13,13,13,0) 20%, rgba(13,13,13,0) 55%, rgba(13,13,13,.8) 100%);
+      linear-gradient(180deg, rgba(13,13,13,.5) 0%, rgba(13,13,13,0) 22%, rgba(13,13,13,0) 55%, rgba(13,13,13,.9) 100%);
     pointer-events:none;
   }
 
@@ -123,15 +125,10 @@
   }
   .cta:hover .arrow{transform:translateX(6px)}
 
-  /* pulsing ring around CTA */
+  /* subtle breathing accent under the CTA — no aggressive pulsing */
   .cta::before{
-    content:"";position:absolute;inset:-4px;border-radius:4px;border:1px solid var(--orange);
-    opacity:.4;animation:pulse 2.4s ease-out infinite;pointer-events:none;
-  }
-  @keyframes pulse{
-    0%{transform:scale(1);opacity:.5}
-    80%{transform:scale(1.12);opacity:0}
-    100%{transform:scale(1.12);opacity:0}
+    content:"";position:absolute;left:50%;bottom:-10px;transform:translateX(-50%);
+    width:60%;height:1px;background:var(--orange);opacity:.25;pointer-events:none;
   }
 
   .hero__meta{display:flex;gap:24px;flex-wrap:wrap;margin-top:22px;font-family:var(--f-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--paper);opacity:.7}
@@ -321,7 +318,7 @@
 <!-- HERO -->
 <section class="hero" id="hero">
   <div class="hero__bg">
-    <img src="./assets/hero.jpg" alt="Силуэт человека на краю бездны, куда падает бесконечный поток резюме и оранжевых конвертов" width="1024" height="1024" fetchpriority="high">
+    <img src="./assets/hero-wide.jpg" alt="Силуэт человека на краю бездны, куда падает бесконечный поток резюме и оранжевых конвертов" width="1024" height="1024" fetchpriority="high">
   </div>
 
   <div class="hero__content">
@@ -332,7 +329,7 @@
 
     <div class="hero__main">
       <h1 class="hero__title">Клоака<br><em>печали</em></h1>
-      <p class="hero__sub">Десять минут через всё, что достало тебя за последние пять лет поисков работы в России. Четыре уровня, один выход.</p>
+      <p class="hero__sub">Шутер про то, как в России ищут работу. Четыре уровня, десять минут.</p>
 
       <a class="cta" id="play" href="./game/">
         <span>Начать&nbsp;игру</span>
@@ -355,13 +352,13 @@
 <section class="intro">
   <div class="intro__inner">
     <div class="intro__kicker">
-      <div class="seclabel" data-reveal>ЧТО ЭТО</div>
-      <h2 class="sectitle" data-reveal>Арт-проект, <em>который стреляет</em>.</h2>
+      <div class="seclabel" data-reveal>ВКРАТЦЕ</div>
+      <h2 class="sectitle" data-reveal>Шутер про <em>поиск работы</em>.</h2>
     </div>
     <div class="intro__copy">
-      <p class="lede" data-reveal>Игра про то, как тебя перемалывает машина, которая якобы про <em>тебя</em>.</p>
-      <p data-reveal>Ты летишь сквозь ленту вакансий, отбиваешься от карьерных гуру, прорываешься через HR-болото. В конце — собеседование, которое не заканчивается никогда.</p>
-      <p data-reveal>Играется в браузере. Бесплатно. По лицензии Creative Commons — хочешь покажи, хочешь разбери на части.</p>
+      <p class="lede" data-reveal>Пять лет HH, LinkedIn и собеседований — уложены в десять минут геймплея.</p>
+      <p data-reveal>Ты летишь сквозь ленту вакансий, отбиваешься от карьерных коучей, проходишь через HR-болото. В финале — собеседование, которое не заканчивается.</p>
+      <p data-reveal>Открывается в браузере. Бесплатно. По лицензии Creative Commons.</p>
     </div>
   </div>
 </section>
@@ -369,8 +366,8 @@
 <!-- ROSTER — meet the enemies -->
 <section class="roster">
   <div class="roster__head">
-    <div class="seclabel" data-reveal>КТО ВСТРЕЧАЕТСЯ</div>
-    <h2 class="sectitle" data-reveal>Каждого <em>узнаёшь</em>. Никого не существует.</h2>
+    <div class="seclabel" data-reveal>ПЕРСОНАЖИ</div>
+    <h2 class="sectitle" data-reveal>Ты уже <em>встречал</em> каждого.</h2>
   </div>
   <div class="roster__grid">
     <div class="char" data-reveal>
@@ -427,8 +424,8 @@
 <!-- CHAPTERS -->
 <section class="chapters">
   <div class="chapters__head">
-    <div class="seclabel" data-reveal>ЧЕТЫРЕ ГЛАВЫ</div>
-    <h2 class="sectitle" data-reveal>Один <em>выход</em>.</h2>
+    <div class="seclabel" data-reveal>УРОВНИ</div>
+    <h2 class="sectitle" data-reveal>Четыре <em>уровня</em>.</h2>
   </div>
   <div class="chapters__list">
     <article class="chapter" data-reveal>
@@ -495,8 +492,8 @@
 <!-- FINAL CTA -->
 <section class="final">
   <div class="final__inner">
-    <h2 class="final__heading" data-reveal>Готов <em>войти?</em></h2>
-    <p class="final__sub" data-reveal>ДЕСЯТЬ МИНУТ · ОДНА КНОПКА</p>
+    <h2 class="final__heading" data-reveal>Готов?</h2>
+    <p class="final__sub" data-reveal>10 МИНУТ · В БРАУЗЕРЕ · БЕСПЛАТНО</p>
     <a class="cta" href="./game/" data-reveal>
       <span>Начать&nbsp;игру</span>
       <span class="arrow" aria-hidden="true">→</span>
