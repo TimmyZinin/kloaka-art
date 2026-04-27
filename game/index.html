@@ -17,11 +17,17 @@
     --muted:#6a6258;
   }
   html,body{margin:0;background:var(--ink);color:var(--paper);font-family:"Georgia","Iowan Old Style",serif;min-height:100vh;overflow:hidden}
-  #unity-container{display:flex;align-items:center;justify-content:center;min-height:100vh}
+  /* override TemplateData absolute+translate centering so flex layout works */
+  #unity-container{position:static!important;left:auto!important;top:auto!important;transform:none!important;display:flex;align-items:center;justify-content:center;min-height:100vh;width:100%}
   #unity-canvas{background:#000;outline:none}
-  #unity-loading-bar{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:var(--ink);z-index:5}
+  #unity-loading-bar{position:fixed!important;inset:0!important;left:0!important;top:0!important;transform:none!important;display:none;flex-direction:column;align-items:center;justify-content:center;background:var(--ink);z-index:5;gap:24px}
   #unity-logo{display:none}
-  #unity-progress-bar-empty{width:240px;height:4px;background:#2a2a2a;border-radius:2px;overflow:hidden}
+  #unity-spinner{width:56px;height:56px;border:3px solid #2a2a2a;border-top-color:var(--orange);border-radius:50%;animation:kp-spin 1s linear infinite}
+  @keyframes kp-spin{to{transform:rotate(360deg)}}
+  #unity-loading-text{font-family:"Georgia","Iowan Old Style",serif;font-size:18px;color:var(--paper);letter-spacing:.02em;margin:0}
+  #unity-loading-percent{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:13px;color:var(--orange);letter-spacing:.15em;margin-top:-12px}
+  #unity-loading-note{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;max-width:320px;text-align:center;line-height:1.5}
+  #unity-progress-bar-empty{width:240px;height:3px;background:#2a2a2a;border-radius:2px;overflow:hidden}
   #unity-progress-bar-full{height:100%;width:0%;background:var(--orange);transition:width .2s}
   #unity-warning{position:fixed;top:12px;left:12px;right:12px;z-index:6}
 
@@ -63,10 +69,13 @@
 <div id="unity-container" class="unity-desktop">
   <canvas id="unity-canvas" width="960" height="600" tabindex="-1"></canvas>
   <div id="unity-loading-bar">
-    <div id="unity-logo"></div>
+    <div id="unity-spinner"></div>
+    <p id="unity-loading-text">Загружаю клоаку…</p>
     <div id="unity-progress-bar-empty">
       <div id="unity-progress-bar-full"></div>
     </div>
+    <div id="unity-loading-percent">0%</div>
+    <div id="unity-loading-note">первый запуск — ≈70 МБ художественного материала. иногда занимает до минуты.</div>
   </div>
   <div id="unity-warning"></div>
 </div>
@@ -132,7 +141,10 @@
   script.src = loaderUrl;
   script.onload = function(){
     createUnityInstance(canvas, config, function(progress){
-      document.querySelector("#unity-progress-bar-full").style.width = (100 * progress) + "%";
+      var pct = Math.round(100 * progress);
+      document.querySelector("#unity-progress-bar-full").style.width = pct + "%";
+      var pctEl = document.querySelector("#unity-loading-percent");
+      if (pctEl) pctEl.textContent = pct + "%";
     }).then(function(unityInstance){
       document.querySelector("#unity-loading-bar").style.display = "none";
     }).catch(function(message){
